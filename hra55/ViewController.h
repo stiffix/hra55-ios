@@ -7,8 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface ViewController : UIViewController
+
+@property NSMutableArray *solutions;
+@property IBOutlet UILabel *question;
+@property IBOutletCollection(UITextField) NSMutableArray *answers;
+@property IBOutlet UITextField *guess;
+@property IBOutlet UITextField *someInfo;
+@property BOOL userFb;
+@property (weak, nonatomic) IBOutlet UIButton *facebookButton;
+
+- (IBAction)submit:(id)sender;
 
 
 @end
