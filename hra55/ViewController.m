@@ -2,8 +2,8 @@
 //  ViewController.m
 //  hra55
 //
-//  Created by Dusan Matejka on 10/17/15.
-//  Copyright © 2015 Dusan Matejka. All rights reserved.
+//  Created by Stefan Gerboc on 10/17/15.
+//  Copyright © 2015 Stefan Gerboc. All rights reserved.
 //
 
 #import "ViewController.h"
@@ -159,6 +159,32 @@
              }
          }];
     }
+    
+    // Send HTTP POST answer - uloha
+    
+    
+    NSString *post = [NSString stringWithFormat:@"action=%@&q=%@&a=%@",@"answer",self.question.text,currentAnswer];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:@"http://hra55-1108.appspot.com/command"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    NSURLConnection *conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+    if(conn)
+    {
+        NSLog(@"Connection Successful");
+    }
+    else
+    {
+        NSLog(@"Connection could not be made");
+    }
+    
+
 }
 
 @end
